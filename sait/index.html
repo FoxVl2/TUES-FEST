@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Начална страница</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/unnamed.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#home" class="homepage" style="text-decoration: none;">Train To Win</a>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="upraznenia.html" id="link-upraznenia">Упражнения</a></li>
+            <li><a href="eko_nagradi.html" id="link-klasacia">Еко Награди</a></li>
+            <li><a href="nagradi.html" id="link-nagradi">Награди</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+    <section id="home" class="section">
+        <div class="hero">
+            <h1>Добре дошли в нашия сайт!</h1>
+            <p>Тук можете да намерите упражнения, класации и награди.</p>
+            <a href="upraznenia.html" class="cta-button">Започнете сега</a>
+            <div class="image-container">
+                <img src="snimka.jpg" alt="gym">
+            </div>
+        </div>
+    </section>
+    <section id="klasacia" class="section">
+        <h2>Класация</h2>
+        <table class="klasacia-table">
+            <thead>
+                <tr>
+                    <th>Място</th>
+                    <th>Потребител</th>
+                    <th>Точки</th>
+                </tr>
+            </thead>
+            <tbody id="klasacia-body">
+            </tbody>
+        </table>
+    </section>
+     
+    <script>
+        function loadKlasacia() {
+            let users = JSON.parse(localStorage.getItem("ttw_users")) || [];
+            let tbody = document.getElementById("klasacia-body");
+            tbody.innerHTML = "";
+            users.sort((a, b) => (b.points || 0) - (a.points || 0));
+
+            users.forEach((user, index) => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.points || 0}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+  
+        window.onload = loadKlasacia;
+    </script>
+ 
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+

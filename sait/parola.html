@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход и Регистрация</title>
+    <style>
+       body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    text-align: center;
+}
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>🔑 Вход</h1>
+        <input type="email" id="login-email" placeholder="Имейл">
+        <input type="password" id="login-password" placeholder="Парола">
+        <button onclick="login()">Вход</button>
+        <p class="link" onclick="showForgotPassword()">Забравена парола?</p>
+        <p class="link" onclick="showRegister()">Нямаш акаунт? Регистрирай се</p>
+    </div>
+
+    <div class="container" id="register-container" style="display: none;">
+        <h1>📝 Регистрация</h1>
+        <input type="email" id="register-email" placeholder="Имейл">
+        <input type="password" id="register-password" placeholder="Парола">
+        <button onclick="register()">Регистрация</button>
+        <p class="link" onclick="showLogin()">Вече имаш акаунт? Влез</p>
+    </div>
+
+    <div class="container" id="forgot-password-container" style="display: none;">
+        <h1>🔄 Забравена парола</h1>
+        <input type="email" id="forgot-email" placeholder="Имейл">
+        <button onclick="forgotPassword()">Нулирай паролата</button>
+        <p class="link" onclick="showLogin()">Обратно към вход</p>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById("login-container").style.display = "block";
+            document.getElementById("register-container").style.display = "none";
+            document.getElementById("forgot-password-container").style.display = "none";
+        }
+        
+        function showRegister() {
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("register-container").style.display = "block";
+            document.getElementById("forgot-password-container").style.display = "none";
+        }
+        
+        function showForgotPassword() {
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("register-container").style.display = "none";
+            document.getElementById("forgot-password-container").style.display = "block";
+        }
+
+        function register() {
+            let email = document.getElementById("register-email").value;
+            let password = document.getElementById("register-password").value;
+            let errorMessages = [];
+            
+            if (password.length < 6) {
+                errorMessages.push("Паролата трябва да е поне 6 символа!");
+            }
+            
+            if (!/[A-Z]/.test(password)) {
+                errorMessages.push("Паролата трябва да съдържа поне една главна буква!");
+            }
+
+            if (!/\d/.test(password)) {
+                errorMessages.push("Паролата трябва да съдържа поне една цифра!");
+            }
+
+            if (!email || !password) {
+                errorMessages.push("Попълни всички полета!");
+            }
+            
+            if (errorMessages.length > 0) {
+                alert(errorMessages.join("\n"));
+                return;
+            }
+            
+            let users = JSON.parse(localStorage.getItem("ttw_users")) || [];
+            if (users.some(user => user.email === email)) {
+                alert("Имейлът вече е регистриран!");
+                return;
+            }
+            
+            users.push({ email, password });
+            localStorage.setItem("ttw_users", JSON.stringify(users));
+            alert("Успешна регистрация! Влез в акаунта си.");
+            showLogin();
+        }
+        
+        function login() {
+            let email = document.getElementById("login-email").value;
+            let password = document.getElementById("login-password").value;
+            
+            let users = JSON.parse(localStorage.getItem("ttw_users")) || [];
+            let user = users.find(user => user.email === email && user.password === password);
+            
+            if (user) {
+                alert("Успешен вход!");
+                localStorage.setItem("ttw_currentUser", email);
+                window.location.href = "index.html"; 
+            } else {
+                alert("Грешен имейл или парола!");
+            }
+        }
+        
+        function forgotPassword() {
+            let email = document.getElementById("forgot-email").value;
+            let users = JSON.parse(localStorage.getItem("ttw_users")) || [];
+            let user = users.find(user => user.email === email);
+            
+            if (!user) {
+                alert("Имейлът не е намерен!");
+                return;
+            }
+            
+            let newPassword = prompt("Въведи нова парола:");
+            if (!newPassword) return;
+            
+            user.password = newPassword;
+            localStorage.setItem("ttw_users", JSON.stringify(users));
+            alert("Паролата е сменена успешно!");
+            showLogin();
+        }
+    </script>
+</body>
+</html>

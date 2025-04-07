@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Еко Награди</title>
+        <link rel="stylesheet" href="eko_nagradi.css">
+        <link rel="icon" type="image/x-icon" href="/unnamed.png">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" class="homepage" style="text-decoration: none;">Train To Win</a>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="upraznenia.html" id="link-upraznenia">Упражнения</a></li>
+                <li><a href="eko_nagradi.html" id="link-klasacia">Еко Награди</a></li>
+                <li><a href="nagradi.html" id="link-nagradi">Награди</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+        <main class="offers-container">
+            <div class="offers-flex">
+                
+                
+                <div class="offer-card">
+                    <h3>Фитнес събитие</h3>
+                    <p>Вдъхновява за активен живот.</p>
+                    <p class="points">10000 точки</p>
+                    <button onclick="buyOffer(10000)">Участвай</button>
+                </div>
+                <div class="offer-card">
+                    <h3>Маратон</h3>
+                    <p>Тества издръжливостта.</p>
+                    <p class="points">22000 точки</p>
+                    <button onclick="buyOffer(22000)">Участвай</button>
+                </div>
+                <div class="offer-card">
+                    <h3>Състезание за сила</h3>
+                    <p>Показва границите на възможностите.</p>
+                    <p class="points">16700 точки</p>
+                    <button onclick="buyOffer(16700)">Участвай</button>
+                </div>
+               
+            </div>
+        </main>
+        
+
+        <script src="eko_nagradi.js"></script>
+    </body>
+ </html>
+

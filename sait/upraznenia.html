@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упражнения</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/unnamed.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="color: white; text-decoration: none;">Train To Win</a></div>
+        <ul class="nav-links">
+            <li><a href="upraznenia.html">Упражнения</a></li>
+            <li><a href="eko_nagradi.html">Еко Награди</a></li>
+            <li><a href="nagradi.html">Награди</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Изберете вашият фитнес план:</h1>
+        <div class="plans">
+            <div class="plan" onclick="selectPlan('basic')">
+                <h2>Basic Exercise</h2>
+                <b><p>Със или без (дъмбели, ластици, постелки)</p></b>
+                <div class="icon">💪</div>
+            </div>
+            <div class="plan" onclick="selectPlan('weekly')">
+                <h2>Weekly Program</h2>
+                <b><p>Упражнения за всеки ден от седмицата</p></b>
+                <div class="icon">📅</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="plans.js"></script>
+</body>
+</html>
