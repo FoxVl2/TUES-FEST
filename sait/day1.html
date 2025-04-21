@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 1: Arms</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="points-display" id="pointsDisplay">Points: 0</div>
+    
     <div class="container">
         <h1>Day 1: Arms</h1>
+        
         <div class="exercise">
             <div class="exercise-card">
                 <img src="https://training.fit/wp-content/uploads/2018/12/bizepscurls-800x448.png" alt="Bicep Curls">
@@ -24,11 +27,15 @@
                 <h2>Hammer Curls</h2>
             </div>
         </div>
+        
         <ul id="pointsHistory"></ul>
-        <a href="premium.html"><button>Назад</button></a>
+        
+        <button id="completeBtn" class="complete-btn">Complete</button>
+        <a href="premium.html"><button class="back-btn">Назад</button></a>
     </div>
-    <link href="day1_1.html">
 
+    <script src="points.js"></script>
     <script src="day1.js"></script>
 </body>
 </html>
+     

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     if (!localStorage.getItem('workoutPoints')) {
         localStorage.setItem('workoutPoints', '0');

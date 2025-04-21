@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 3: Legs</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="points.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="points-display" id="pointsDisplay">Points: 0</div>
+    
     <div class="container">
         <h1>Day 3: Legs</h1>
         <div class="exercise">
@@ -24,8 +28,12 @@
                 <h2>Deadlifts</h2>
             </div>
         </div>
-        <a href="premium.html"><button>Назад</button></a>
+        
+        <ul id="pointsHistory"></ul>
+        
+        <button id="completeBtn" class="complete-btn">Complete</button>
+        <a href="premium.html"><button class="back-btn">Назад</button></a>
     </div>
-    
+    <script src="day3.js"></script>
 </body>
 </html>
