@@ -1,34 +1,43 @@
-function loadPoints() {
-    const savedPoints = localStorage.getItem('userPoints');
-    return savedPoints ? parseInt(savedPoints) : 50;
+
+let points = 0;
+
+function initPoints() {
+    const savedPoints = localStorage.getItem('workoutPoints');
+    points = savedPoints ? parseInt(savedPoints) : 0;
+    updatePointsDisplay();
 }
 
 
-function savePoints(points) {
-    localStorage.setItem('userPoints', points);
+function savePoints() {
+    localStorage.setItem('workoutPoints', points.toString());
 }
 
-let points = loadPoints(); 
-function updatePointsDisplay() { 
-    document.getElementById('pointsDisplay').innerText = points;
+
+function updatePointsDisplay() {
+    const displays = document.querySelectorAll('.points-display, .points-button');
+    displays.forEach(element => {
+        element.textContent = `Точки: ${points}`;
+    });
 }
 
-function buyOffer(requiredPoints) {
-    const messageElement = document.getElementById('message');
 
+function addExercisePoints(amount) {
+    points += amount;
+    savePoints();
+    updatePointsDisplay();
+}
+
+
+function redeemPoints(requiredPoints) {
     if (points >= requiredPoints) {
-        points -= requiredPoints; 
-        savePoints(points); 
+        points -= requiredPoints;
+        savePoints();
         updatePointsDisplay();
-        window.location.href="QR2.html"
+        window.location.href = "QR2.html";
     } else {
-        window.location.href="upraznenia.html"
+        window.location.href = "upraznenia.html";
     }
-
-    setTimeout(() => {
-        messageElement.innerText = "";
-    }, 3000);
 }
 
 
-updatePointsDisplay();
+document.addEventListener('DOMContentLoaded', initPoints);
